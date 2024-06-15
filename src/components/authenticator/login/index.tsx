@@ -41,8 +41,8 @@ function Login() {
     formStatusClear();
     startTransition(() => {
       loginAction(values).then((res) => {
-        setFormError(res.error);
-        setFormSuccess(res.success);
+        setFormError(res?.error || '');
+        setFormSuccess(res?.success || '');
       });
     });
   };

@@ -42,8 +42,8 @@ function Register() {
     formStatusClear();
     startTransition(() => {
       registerAction(values).then((res) => {
-        setFormError(res.error);
-        setFormSuccess(res.success);
+        setFormError(res.error || '');
+        setFormSuccess(res.success || '');
       });
     });
   };
