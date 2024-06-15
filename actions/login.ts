@@ -33,6 +33,4 @@ export const loginAction = async (values: z.infer<typeof LoginSchema>) => {
 
     throw err;
   }
-
-  return { success: 'Welcome user!' };
 };
