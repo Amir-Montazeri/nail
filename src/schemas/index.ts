@@ -26,3 +26,17 @@ export const ResetSchema = z.object({
     message: 'Email is required!',
   }),
 });
+
+export const ConfigureNewPasswordSchema = z
+  .object({
+    password: z.string().min(6, {
+      message: 'Minimum 6 characters required!',
+    }),
+    passwordConfiguration: z.string().min(6, {
+      message: 'Minimum 6 characters required!',
+    }),
+  })
+  .refine((data) => data.password === data.passwordConfiguration, {
+    message: "Passwords don't match!",
+    path: ['passwordConfiguration'],
+  });
