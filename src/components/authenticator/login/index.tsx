@@ -48,8 +48,7 @@ function Login() {
     startTransition(() => {
       loginAction(values).then((res) => {
         setFormError(res?.error);
-        // TODO: Add when we add 2FA
-        // setFormSuccess(res.success);
+        setFormSuccess(res?.success);
       });
     });
   };
