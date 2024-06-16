@@ -21,3 +21,14 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     html: `<p>Click <a href="${confirmLink}">here</a> to confirm your email!</p>`,
   });
 };
+
+export const sendPasswordResetEmail = async (email: string, token: string) => {
+  const resetLink = `http://localhost:3000/reset-password?token=${token}&email=${email}`;
+
+  await transporter.sendMail({
+    from: process.env.NODE_MAILER_GOOGLE_EMAIL_ADDRESS,
+    to: email,
+    subject: 'Reset your password',
+    html: `<p>Click <a href="${resetLink}">here</a> to reset your password!</p>`,
+  });
+};
