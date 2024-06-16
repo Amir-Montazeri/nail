@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
+import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useSearchParams } from 'next/navigation';
@@ -96,6 +97,14 @@ function Login() {
                       disabled={isPending}
                     />
                   </FormControl>
+                  <Button
+                    size={'sm'}
+                    variant={'link'}
+                    asChild
+                    className="px-0 font-normal"
+                  >
+                    <Link href="/reset-password">Forgot password?</Link>
+                  </Button>
                   <FormMessage />
                 </FormItem>
               )}

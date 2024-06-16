@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendVerificationEmail = async (email: string, token: string) => {
-  const confirmLink = `http://localhost:3000/new-verification?token=${token}&email=${email}`;
+  const confirmLink = `http://localhost:3000/auth-new-verification?token=${token}&email=${email}`;
 
   await transporter.sendMail({
     from: process.env.NODE_MAILER_GOOGLE_EMAIL_ADDRESS,
