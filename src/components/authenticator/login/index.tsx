@@ -32,7 +32,7 @@ function Login() {
         : '';
   const [isPending, startTransition] = useTransition();
 
-  const formStatusClear = () => {
+  const clearFormStatus = () => {
     setFormError(undefined);
     setFormSuccess(undefined);
   };
@@ -46,7 +46,7 @@ function Login() {
   });
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    formStatusClear();
+    clearFormStatus();
     startTransition(() => {
       loginAction(values)
         .then((res) => {
