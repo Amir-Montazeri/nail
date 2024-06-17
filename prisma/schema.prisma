@@ -24,6 +24,7 @@ model User {
   accounts      Account[]
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  hasAppointment Appointment?
  
   @@map("users")
 }
@@ -52,6 +53,7 @@ model VerificationToken {
   id String @id @default(cuid())
   email String
   token String @unique
+  createdOn DateTime @default(now())
   expires DateTime
 
   @@unique([email, token])
@@ -61,6 +63,7 @@ model PasswordResetToken {
   id String @id @default(cuid())
   email String
   token String @unique
+  createdOn DateTime @default(now())
   expires DateTime
 
   @@unique([email, token])
@@ -82,4 +85,28 @@ model TwoFactorConfirmation {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+}
+
+enum AppointmentServices {
+  NAIL
+  FACE
+  FOOT
+}
+enum AppointmentModels {
+  DIGI
+  MAIL
+  BOOST
+  KEEP
+}
+
+model Appointment {
+  id String @id @default(cuid())
+  service AppointmentServices?
+  model AppointmentModels?
+  date DateTime?
+
+  userId String @unique
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("appointments")
 }

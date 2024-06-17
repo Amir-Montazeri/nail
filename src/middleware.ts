@@ -6,6 +6,9 @@ import {
   apiAuthPrefix,
   authRoutes,
   publicRoutes,
+  appointmentsPrefix,
+  APPOINTMENTS_MAX_STAGE,
+  APPOINTMENTS_MIN_STAGE,
 } from './routes';
 
 const { auth } = NextAuth(authConfig);
@@ -16,7 +19,8 @@ export default auth((req) => {
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix),
     isPublicRoute = publicRoutes.includes(nextUrl.pathname),
-    isAuthRoute = authRoutes.includes(nextUrl.pathname);
+    isAuthRoute = authRoutes.includes(nextUrl.pathname),
+    isAppointmentsRoute = nextUrl.pathname.startsWith(appointmentsPrefix);
 
   if (isApiAuthRoute) {
     return null;
@@ -31,6 +35,32 @@ export default auth((req) => {
 
   if (!isLoggedIn && !isPublicRoute) {
     return Response.redirect(new URL(LOGIN_URL, nextUrl));
+  }
+
+  if (isAppointmentsRoute) {
+    console.log('isAppointmentsRoute!');
+
+    let currentStageNumber: string | number | null =
+      nextUrl.searchParams.get('stage');
+
+    if (!currentStageNumber) {
+      // TODO: redirect to 'lastStage' rather than 0!
+      return Response.redirect(
+        new URL(`${appointmentsPrefix}?stage=0`, nextUrl)
+      );
+    }
+
+    currentStageNumber = Number(currentStageNumber);
+    if (
+      currentStageNumber < APPOINTMENTS_MIN_STAGE ||
+      (isLoggedIn && currentStageNumber > APPOINTMENTS_MAX_STAGE) ||
+      (!isLoggedIn && currentStageNumber >= APPOINTMENTS_MAX_STAGE)
+    ) {
+      // TODO: redirect to 'lastStage' rather than 0!
+      return Response.redirect(
+        new URL(`${appointmentsPrefix}?stage=0`, nextUrl)
+      );
+    }
   }
 
   return null;

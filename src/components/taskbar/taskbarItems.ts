@@ -7,8 +7,7 @@ export const taskbarItems: Array<TaskbarItem> = [
   {
     href: '/appointments',
     innerText: 'appointments',
-    isPublic: false,
-    privateType: 'user',
+    isPublic: true,
   },
   {
     href: '/login',

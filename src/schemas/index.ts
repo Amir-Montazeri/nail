@@ -1,5 +1,7 @@
 import * as z from 'zod';
 
+import { AppointmentServices, AppointmentModels } from '@prisma/client';
+
 export const LoginSchema = z.object({
   email: z.string().email({
     message: 'Email is required!',
@@ -41,3 +43,15 @@ export const ConfigureNewPasswordSchema = z
     message: "Passwords don't match!",
     path: ['passwordConfiguration'],
   });
+
+export const NewAppointmentSchema = z.object({
+  service: z.nativeEnum(AppointmentServices, {
+    message: 'Invalid type!',
+  }),
+  model: z.nativeEnum(AppointmentModels, {
+    message: 'Invalid type!',
+  }),
+  date: z.date({
+    message: 'A booking date is required!',
+  }),
+});
