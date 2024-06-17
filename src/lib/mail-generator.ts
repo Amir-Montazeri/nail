@@ -1,9 +1,16 @@
-export const mailContentGenerator = (
-  headerLabel: string,
-  bodyContent: string,
-  buttonLabel: string,
-  buttonHref: string
-) => {
+export const mailContentGenerator = ({
+  headerLabel,
+  bodyContent,
+  buttonLabel,
+  buttonHref,
+  buttonCode,
+}: {
+  headerLabel: string;
+  bodyContent: string;
+  buttonLabel?: string;
+  buttonHref?: string;
+  buttonCode?: string;
+}) => {
   const mailContent = `<section
       style="
         min-height: 100vh;
@@ -30,7 +37,9 @@ export const mailContentGenerator = (
         <h3 style="text-align: center; line-height: 1.3; margin-bottom: 50px">
           ${bodyContent}
         </h3>
-        <a
+        ${
+          buttonLabel && buttonHref
+            ? `<a
           href="${buttonHref}"
           style="
             display: block;
@@ -49,7 +58,33 @@ export const mailContentGenerator = (
           "
         >
           ${buttonLabel}
-        </a>
+        </a>`
+            : ''
+        }
+        ${
+          buttonCode
+            ? `<div
+      style="
+        padding: 15px 0;
+        width: 170px;
+        text-align: center;
+        margin: 100px auto;
+        background: rgba(124, 58, 237, 90%);
+        border: 1px solid rgb(124, 58, 237);
+        box-shadow: 0 0 10px rgb(124, 58, 237);
+        color: white;
+        border-radius: 10px;
+        font-size: 1.2rem;
+      "
+    >
+      <p
+        style="padding: 0 !important; margin: 0 !important; letter-spacing: 7px"
+      >
+        ${buttonCode}
+      </p>
+    </div>`
+            : ''
+        }
       </main>
     </section>
 `;
