@@ -1,11 +1,16 @@
+'use client';
+
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { MaxWidthWrapper } from '@/features';
-import { buttonVariants } from '../ui/button';
+import { Button, buttonVariants } from '../ui/button';
+import { useCurrentUser } from '@/hooks';
+import { signOut } from 'next-auth/react';
 
 const Navbar = () => {
-  const user = false,
-    isAdmin = true;
+  const { user, status } = useCurrentUser();
+  const authenticated = status === 'authenticated',
+    isAdmin = user?.role === 'ADMIN';
 
   return (
     <nav className="sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
@@ -16,17 +21,11 @@ const Navbar = () => {
           </Link>
 
           <div className="h-full flex items-center space-x-4">
-            {user ? (
+            {authenticated ? (
               <>
-                <Link
-                  href="/api/auth/logout"
-                  className={buttonVariants({
-                    size: 'sm',
-                    variant: 'ghost',
-                  })}
-                >
+                <Button onClick={() => signOut()} size={'sm'} variant={'ghost'}>
                   Sign out
-                </Link>
+                </Button>
                 {isAdmin && (
                   <Link
                     href="/dashboard"

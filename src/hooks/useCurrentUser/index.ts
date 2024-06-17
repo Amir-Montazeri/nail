@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Session } from 'next-auth';
 import { getSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
-import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
+import { DEFAULT_LOGIN_REDIRECT, LOGIN_URL } from '@/routes';
 
 export const useCurrentUser = () => {
   const [session, setSession] = useState<Session | null>(null),
@@ -19,11 +19,9 @@ export const useCurrentUser = () => {
       if (sessionData) {
         setSession(sessionData);
         setStatus('authenticated');
-        console.log('authenticated :)');
         return;
       }
 
-      console.log('unauthenticated :(');
       setStatus('unauthenticated');
     } catch (error) {
       setStatus('unauthenticated');
