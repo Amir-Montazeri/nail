@@ -38,15 +38,16 @@ export default auth((req) => {
   }
 
   if (isAppointmentsRoute) {
-    console.log('isAppointmentsRoute!');
-
     let currentStageNumber: string | number | null =
       nextUrl.searchParams.get('stage');
 
     if (!currentStageNumber) {
       // TODO: redirect to 'lastStage' rather than 0!
       return Response.redirect(
-        new URL(`${appointmentsPrefix}?stage=0`, nextUrl)
+        new URL(
+          `${appointmentsPrefix}?stage=${APPOINTMENTS_MIN_STAGE}`,
+          nextUrl
+        )
       );
     }
 
@@ -58,7 +59,10 @@ export default auth((req) => {
     ) {
       // TODO: redirect to 'lastStage' rather than 0!
       return Response.redirect(
-        new URL(`${appointmentsPrefix}?stage=0`, nextUrl)
+        new URL(
+          `${appointmentsPrefix}?stage=${APPOINTMENTS_MIN_STAGE}`,
+          nextUrl
+        )
       );
     }
   }

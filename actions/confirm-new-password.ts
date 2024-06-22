@@ -32,6 +32,9 @@ export const confirmNewPassword = async (
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
+  if (await bcrypt.compare(password, existingUser.password as string))
+    return { error: 'Set a new password you have never used!' };
+
   await db.user.update({
     where: {
       id: existingUser.id,

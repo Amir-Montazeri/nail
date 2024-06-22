@@ -37,21 +37,11 @@ const Navbar = () => {
                     Dashboard ✨
                   </Link>
                 )}
-                <Link
-                  href="/appointments/book"
-                  className={buttonVariants({
-                    size: 'sm',
-                    className: 'hidden sm:flex items-center gap-1',
-                  })}
-                >
-                  Book appointment
-                  <ArrowRight className="ml-1.5 h-5 w-5" />
-                </Link>
               </>
             ) : (
               <>
                 <Link
-                  href="/api/auth/register"
+                  href="/register"
                   className={buttonVariants({
                     size: 'sm',
                     variant: 'ghost',
@@ -68,19 +58,19 @@ const Navbar = () => {
                 >
                   Login
                 </Link>
-                <div className="h-8 w-px bg-zinc-200 hidden sm:block" />
-                <Link
-                  href="/appointments/book"
-                  className={buttonVariants({
-                    size: 'sm',
-                    className: 'hidden sm:flex items-center gap-1',
-                  })}
-                >
-                  Book appointment
-                  <ArrowRight className="ml-1.5 h-5 w-5" />
-                </Link>
               </>
             )}
+            <div className="h-8 w-px bg-zinc-200 hidden sm:block" />
+            <Link
+              href="/appointments"
+              className={buttonVariants({
+                size: 'sm',
+                className: 'hidden sm:flex items-center gap-1',
+              })}
+            >
+              Book appointment
+              <ArrowRight className="ml-1.5 h-5 w-5" />
+            </Link>
           </div>
         </div>
       </MaxWidthWrapper>

@@ -24,7 +24,8 @@ model User {
   accounts      Account[]
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
-  hasAppointment Appointment?
+  hasAppointment Boolean @default(false)
+  appointment Appointment?
  
   @@map("users")
 }

@@ -1,8 +1,10 @@
 'use client';
-import { useSearchParams } from 'next/navigation';
 
 import { AppointmentsCardWrapper } from '@/features';
+import { getappointmentsStageBio } from '@/lib/appointmentsStages';
 import { APPOINTMENTS_MAX_STAGE, APPOINTMENTS_MIN_STAGE } from '@/routes';
+import { useSearchParams, redirect } from 'next/navigation';
+import React from 'react';
 
 interface ALProps {
   children: React.ReactNode;
@@ -10,18 +12,30 @@ interface ALProps {
 
 function AppointmentsLayout({ children }: ALProps) {
   const searchParams = useSearchParams(),
-    stageNumber = Number(searchParams.get('stage')) || 0;
+    stageNumber = Number(searchParams.get('stage')),
+    stageBio = getappointmentsStageBio(stageNumber),
+    { stageName, stageLabel } = {
+      stageName: stageBio?.stageName,
+      stageLabel: stageBio?.stageLabel,
+    };
 
-  return (
+  return stageName && stageLabel ? (
     <AppointmentsCardWrapper
       stage={stageNumber}
-      stageName="Select Service"
-      headerLabel="Select one of these."
+      stageName={stageName}
+      headerLabel={stageLabel}
       minStage={APPOINTMENTS_MIN_STAGE}
       maxStage={APPOINTMENTS_MAX_STAGE}
     >
-      {children}
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement(child))
+          return React.cloneElement(child, stageNumber);
+
+        return child;
+      })}
     </AppointmentsCardWrapper>
+  ) : (
+    redirect(`/error?message=Invalid_Stage_Number`)
   );
 }
 

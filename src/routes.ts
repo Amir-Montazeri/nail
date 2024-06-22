@@ -49,7 +49,7 @@ export const APPOINTMENTS_MAX_STAGE = 2;
  * The first stage would be a bit explaning.
  * @type {number}
  */
-export const APPOINTMENTS_MIN_STAGE = 0;
+export const APPOINTMENTS_MIN_STAGE = 1;
 
 /**
  * The prefix for appointments routes.

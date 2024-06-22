@@ -1,1 +1,1 @@
-export { default } from './first-stage';
+export { default as StageOne } from './stage-one';

@@ -53,6 +53,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         session.user.role = token.role as UserRole;
       }
 
+      if (typeof token.hasAppointment == 'boolean' && session.user) {
+        session.user.hasAppointment = token.hasAppointment as boolean;
+      }
+
       return session;
     },
     async jwt({ token }) {
@@ -62,8 +66,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
       if (!existingUser) return token;
 
-      const { role } = existingUser;
+      const { role, hasAppointment } = existingUser;
       token.role = role;
+      token.hasAppointment = hasAppointment;
 
       return token;
     },

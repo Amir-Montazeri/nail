@@ -1,7 +1,7 @@
+import './globals.css';
 import type { Metadata } from 'next';
 import { Recursive } from 'next/font/google';
 import { auth } from '@/auth';
-import './globals.css';
 import { Navbar, Taskbar } from '@/components';
 import Providers from './providers';
 

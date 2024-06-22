@@ -1,17 +1,35 @@
-export const setItem = (key: string, value: any) => {
+export const setLSItem = (key: string, value: any) => {
+  if (typeof window === 'undefined') {
+    throw Error('localStorage would not work on server!');
+  }
+
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-export const getItem = (key: string) => {
-  const value = localStorage.getItem(key);
+export const getLSItem = (key: string) => {
+  if (typeof window === 'undefined') {
+    throw Error('localStorage would not work on server!');
+  }
 
-  return value;
+  const value = localStorage.getItem(key);
+  if (!value) return null;
+  const parsedValue = JSON.parse(value as string);
+
+  return parsedValue;
 };
 
-export const deleteItem = (key: string) => {
+export const deleteLSItem = (key: string) => {
+  if (typeof window === 'undefined') {
+    throw Error('localStorage would not work on server!');
+  }
+
   localStorage.removeItem(key);
 };
 
-export const forceDeleteAllItems = () => {
+export const forceDeleteAllLSItems = () => {
+  if (typeof window === 'undefined') {
+    throw Error('localStorage would not work on server!');
+  }
+
   localStorage.clear();
 };

@@ -1,6 +1,7 @@
 import { GrLinkNext } from 'react-icons/gr';
 import { GrLinkPrevious } from 'react-icons/gr';
 import Link from 'next/link';
+
 import {
   Card,
   CardHeader,
