@@ -3,7 +3,7 @@ import { MaxWidthWrapper } from '@/features';
 
 export default function Home() {
   return (
-    <main className="grainy-light">
+    <main>
       <section>
         <MaxWidthWrapper>
           <PageFirstImpression />

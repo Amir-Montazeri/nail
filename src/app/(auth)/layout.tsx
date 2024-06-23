@@ -4,7 +4,7 @@ interface ALProps {
 
 function AuthLayout({ children }: ALProps) {
   return (
-    <div className="min-h-screen flex items-center justify-center grainy-light dark:grainy-dark">
+    <div className="min-h-screen flex items-center justify-center">
       {children}
     </div>
   );

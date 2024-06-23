@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config = {
-  darkMode: ['class'],
+  darkMode: ['selector'],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -20,6 +20,10 @@ const config = {
     extend: {
       backgroundColor: {
         violet: 'hsl(var(--primary))',
+      },
+      backgroundImage: {
+        'grainy-light': `url('../assets/bg.png')`,
+        'grainy-dark': `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),url('../assets/bg.png')`,
       },
       borderColor: {
         violet: 'hsl(var(--primary))',

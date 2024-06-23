@@ -4,6 +4,7 @@ import { Recursive } from 'next/font/google';
 import { auth } from '@/auth';
 import { Navbar, Taskbar } from '@/components';
 import Providers from './providers';
+import { cn } from '@/lib/utils';
 
 const recursive = Recursive({ subsets: ['latin'] });
 
@@ -20,8 +21,13 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <html lang="en" className="darkz">
-      <body className={recursive.className}>
+    <html lang="en" className="dark">
+      <body
+        className={cn(
+          'bg-grainy-light dark:bg-grainy-dark min-h-screen',
+          recursive.className
+        )}
+      >
         <Providers session={session}>
           <Navbar />
           {children}
