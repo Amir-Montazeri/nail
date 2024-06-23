@@ -21,7 +21,7 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="light">
       <body
         className={cn(
           'bg-grainy-light dark:bg-grainy-dark min-h-screen',
